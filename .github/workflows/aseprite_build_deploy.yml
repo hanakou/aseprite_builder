@@ -69,6 +69,8 @@ jobs:
       - name: (Windows) Install dependencies
         if: matrix.os == 'windows-latest'
         uses: seanmiddleditch/gha-setup-ninja@v1
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       - name: (Ubuntu) Install dependencies
         if: matrix.os == 'ubuntu-latest'
         run: sudo apt install -y cmake ninja-build libxcursor-dev libxi-dev libgl1-mesa-dev
@@ -78,6 +80,8 @@ jobs:
       - name: Get Skia from cache
         id: skia-cache
         uses: actions/cache@v2
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         with:
           path: skia
           key: skia-${{ matrix.os }}-cache
@@ -98,6 +102,8 @@ jobs:
       - name: (Windows) Setting Visual Studio build environment variables and paths
         if: matrix.os == 'windows-latest'
         uses: seanmiddleditch/gha-setup-vsdevenv@v1
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       - name: (Windows) Run CMake
         if: matrix.os == 'windows-latest'
         working-directory: aseprite/build
